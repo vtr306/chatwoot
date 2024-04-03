@@ -143,14 +143,7 @@ class Messages::Instagram::MessageBuilder < Messages::Messenger::MessageBuilder
       source_id: @messaging[:message][:mid]
     ).first
 
-    time_now = Time.now.utc
-    time_range = (time_now - 5)..time_now
-    same_content_message = conversation.messages.where(
-      content: @messaging[:message][:text],
-      created_at: time_range
-    ).first
-
-    cw_message.present? || same_content_message.present?
+    cw_message.present?
   end
 
   def all_unsupported_files?
